@@ -25,7 +25,12 @@ CAD design and measuring.
 *Harris Corporation, Software Engineer, Apr. 2016 - Present*
 
 - Working with lidar technology, machine learning capabilities, debugging and analytical work
-- Using languages such as Python, Javascript, IDL and C++
+- Much of the work was conducted from a 'work at home' environment, and thus required independent working on projects
+to manage time and research solutions to problems.
+- Worked on varying projects including debugging legacy code, building a HTML based test checklist, creating a image viewer UI using python,
+designing test scripts for a Javascript application, building a HTML/Angular map viewer for a online solution, aiding with the development 
+of a machine learning API and various DevOps style tasks.
+- Using languages such as Python, Javascript, Angular, HTML5, CSS, IDL and C++
 
 *Cased Dimensions, Build Team Member Temporary Contract, Feb. 16 - Mar. 16*
 
@@ -98,11 +103,11 @@ team members.
 
 **Operating Systems:** Windows, iOS, android os
 
-**Development Languages:** Java, MySQL, C#, HTML, CSS, XML, PHP, JavaScript, Jquery, Python, IDL, Markdown
+**Development Languages:** Java, MySQL, C#, HTML, CSS, XML, PHP, JavaScript, Jquery, Python, IDL, Markdown, Angular
 
 **Applications:** Visual Studio, Microsoft Office (Word, Excel, PowerPoint, Database), Microsoft Project, 
 AutoCAD, Adobe Photoshop CC, Adobe After Effects CS6, Adobe Premiere Pro CS6, Audacity, Sony Vegas Pro, 
-Eclipse for Java, Android Studio, NetBeans IDE, Unity, PlayCanvas, Unreal Engine 4 
+Eclipse for Java, Android Studio, NetBeans IDE, Unity, PlayCanvas, Unreal Engine 4, MongoDB 
 
 **Online Courses taken:** Introduction to C++ (MIT OpenCourseWare), Machine Learning (Stanford University - Coursera), Learning Full-Stack JavaScript Development: MongoDB, Node, and React (Lynda.com)
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 <style>
+			#map {
+ 				height: 800px;
+ 				width: 100%;
+			}
+	 </style>
+</head>
+   
+<body>
+	 
+	 <div id="map"></div>
+	 <script>
+			// global vars
+			var data = [];
+			
+			// get google sheet data csv
+			$.ajax({
+    		url : "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsvn_jf9hmjqBRQGgpx_jLyk8Mgd4o3INBCKVohiDBjFVxJznUbHj9_hSfdA-uWNm6iURS41mSIAym/pub?output=csv",
+    		success : function(result) {
+        	//console.log(result);
+					var resArr = result.split(",");
+					// cycle through and tidy up
+					var sliceArr;
+					for (var i = 6; i < resArr.length; i++) {
+						 if (resArr[i] == "") {
+								sliceArr = resArr.slice(6, i);
+								break;
+						 }
+					}
+					// move all the good data across
+					for (var d = 0; d < sliceArr.length; d = d + 6) {
+						 data.push([sliceArr[d],sliceArr[d+1],sliceArr[d+2],sliceArr[d+3],sliceArr[d+4]]);
+					}
+				}
+			});
+			
+			// init map
+      function initMap() {
+        var uluru = {lat: -40.749309, lng: 173.495362};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: uluru,
+          styles: [
+              {"featureType":"all","elementType":"geometry","stylers":[{"color":"#cba15f"}]},
+              {"featureType":"all","elementType":"labels.text.fill","stylers":[{"gamma":0.01},{"lightness":20}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"saturation":-31},{"lightness":-33},{"weight":2},{"gamma":0.8}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+              {"featureType":"landscape","elementType":"geometry","stylers":[{"lightness":30},{"saturation":30},{"visibility":"on"},{"color":"#cea76a"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"saturation":20},{"color":"#9a7b40"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"lightness":20},{"saturation":-20}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":10},{"saturation":-30}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"saturation":25},{"lightness":25}]},{"featureType":"water","elementType":"all","stylers":[{"lightness":-20}]},
+              {"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#17263c"},{"saturation":"-5"},{"lightness":"8"}]}
+          ]
+        });
+				 
+				addInfo(map, data);
+
+      }
+			
+			// add marker
+			function addInfo(map, data) {
+				 
+				 console.log(data);
+				 
+				 // local vars
+				 var infowindow = new google.maps.InfoWindow();
+				 var marker;
+				 
+				 // set data
+				 for (var i = 0; i < data.length; i++) {
+						if (data[i][1] != null) {
+							 var geo = {lat: parseFloat(data[i][3]), lng: parseFloat(data[i][4])};
+							 
+							 marker = new google.maps.Marker({
+								 position: geo,
+								 map: map,
+								 title: data[i][1]
+							 });
+							 console.log(data[i][0]);
+							 
+							 var colour = "#FFFFFF";
+							 if (data[i][0].includes('HQ')) {
+									colour = "#edfb0d";
+							 } else if (data[i][0].includes('Hostel')) {
+   								colour = "#df2a2a";
+							 } else if (data[i][0].includes('Activity')) {
+									colour = "#45f41e";
+							 } else {
+									colour = "#FFFFFF";
+							 }
+							 var circle = new google.maps.Circle({
+									strokeColor: colour,
+									strokeOpacity: 0.8,
+									strokeWeight: 2,
+									fillColor: colour,
+									fillOpacity: 0.35,
+									map: map,
+									center: marker.getPosition(),
+									radius: 10000
+          		 });
+
+							 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        				return function() {
+          				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">'+ data[i][0] + ': ' + data[i][1] +'</h2>'+
+            			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Co-ordinates: '+ data[i][3] + ', ' + data[i][4] +'</p></div></div>');
+          				infowindow.open(map, marker);
+        				}
+      				})(marker, i));
+						}
+				 }
+			}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEhjUiJyOzQy6kEPVKAiMKCVtwozfWHnE&callback=initMap">
+    </script>
+    <script>
+    
+    </script>
+</body>
+</html>
