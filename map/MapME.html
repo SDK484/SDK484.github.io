@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	 <link rel="icon" href="http://www.mckellen.com/images/1257.jpg">
+	 <title>Middle Earth Planner</title>
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	 <style>
 			#map {
- 				height: 800px;
+ 				height: 1000px;
  				width: 100%;
 			}
 	 </style>
@@ -16,12 +19,12 @@
 	 <script>
 			// global vars
 			var data = [];
-			
-			// get google sheet data csv
+		 
+		 	// get google sheet data csv
 			$.ajax({
-    		url : "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsvn_jf9hmjqBRQGgpx_jLyk8Mgd4o3INBCKVohiDBjFVxJznUbHj9_hSfdA-uWNm6iURS41mSIAym/pub?output=csv",
-    		success : function(result) {
-        	//console.log(result);
+				url : "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsvn_jf9hmjqBRQGgpx_jLyk8Mgd4o3INBCKVohiDBjFVxJznUbHj9_hSfdA-uWNm6iURS41mSIAym/pub?output=csv",
+				success : function(result) {
+					//console.log(result);
 					var resArr = result.split(",");
 					// cycle through and tidy up
 					var sliceArr;
@@ -30,7 +33,7 @@
 								sliceArr = resArr.slice(6, i);
 								break;
 						 }
-					}
+					} 
 					// move all the good data across
 					for (var d = 0; d < sliceArr.length; d = d + 6) {
 						 data.push([sliceArr[d],sliceArr[d+1],sliceArr[d+2],sliceArr[d+3],sliceArr[d+4]]);
