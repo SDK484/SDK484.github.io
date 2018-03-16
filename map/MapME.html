@@ -7,7 +7,7 @@
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	 <style>
 			#map {
- 				height: 1000px;
+ 				height: 800px;
  				width: 100%;
 			}
 	 </style>
@@ -19,7 +19,7 @@
 	 <script>
 			// global vars
 			var data = [];
-		 
+		   
 		 	// get google sheet data csv
 			$.ajax({
 				url : "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsvn_jf9hmjqBRQGgpx_jLyk8Mgd4o3INBCKVohiDBjFVxJznUbHj9_hSfdA-uWNm6iURS41mSIAym/pub?output=csv",
@@ -54,9 +54,10 @@
               {"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#17263c"},{"saturation":"-5"},{"lightness":"8"}]}
           ]
         });
-				 
-				addInfo(map, data);
-
+				
+				setTimeout(function() {
+					addInfo(map, data);
+				}, 3000);
       }
 			
 			// add marker
