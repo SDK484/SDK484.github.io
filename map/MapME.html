@@ -47,6 +47,9 @@
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 6,
           center: uluru,
+					gestureHandling: 'greedy',
+					scrollwheel: true,
+  				zoomControl: true,
           styles: [
               {"featureType":"all","elementType":"geometry","stylers":[{"color":"#cba15f"}]},
               {"featureType":"all","elementType":"labels.text.fill","stylers":[{"gamma":0.01},{"lightness":20}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"saturation":-31},{"lightness":-33},{"weight":2},{"gamma":0.8}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
@@ -104,8 +107,8 @@
 
 							 google.maps.event.addListener(marker, 'click', (function(marker, i) {
         				return function() {
-          				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">' + data[i][1] +'</h2>'+
-            			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Co-ordinates: '+ data[i][3] + ', ' + data[i][4] +'</p></div></div>');
+          				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">'+ data[i][0].substring(2) +': '+ data[i][1] +'</h2>'+
+            			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Co-ordinates: '+ data[i][3] +', '+ data[i][4] +'</p></div></div>');
           				infowindow.open(map, marker);
         				}
       				})(marker, i));
