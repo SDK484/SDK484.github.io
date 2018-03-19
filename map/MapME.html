@@ -84,9 +84,9 @@
 							 var colour = "#FFFFFF";
 							 if (data[i][0].includes('HQ')) {
 									colour = "#edfb0d";
-							 } else if (data[i][0].includes('Hostel')) {
+							 } else if (data[i][0].includes('Hos')) {
    								colour = "#df2a2a";
-							 } else if (data[i][0].includes('Activity')) {
+							 } else if (data[i][0].includes('Act')) {
 									colour = "#45f41e";
 							 } else {
 									colour = "#FFFFFF";
@@ -101,10 +101,12 @@
 									center: marker.getPosition(),
 									radius: 10000
           		 });
+							
+							 var type = data[i][0].split(" ");
 
 							 google.maps.event.addListener(marker, 'click', (function(marker, i) {
         				return function() {
-          				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">'+ data[i][0] + ': ' + data[i][1] +'</h2>'+
+          				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">'+ type[1] + ': ' + data[i][1] +'</h2>'+
             			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Co-ordinates: '+ data[i][3] + ', ' + data[i][4] +'</p></div></div>');
           				infowindow.open(map, marker);
         				}
