@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	 <link rel="icon" href="https://pbs.twimg.com/profile_images/3161261547/27c23bdd007a89aac9dca076b6d3460f_400x400.jpeg">
+	 <title>NI Tourism Proto</title>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 <style>
+		 #map {
+ 				/*height: 100%;*/
+ 				width: 100%;
+		 }
+		 #wrapper { 
+			 	position: relative; 
+		 }
+   	 #over { 
+			 	position: absolute; 
+			 	top: 8px; 
+			 	left: 15px; 
+			 	z-index: 99;
+		 }
+		 .sidenav {
+				height: 100%;
+				width: 0;
+				position: fixed;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				background-color: #111;
+				overflow-x: hidden;
+				transition: 0.5s;
+				padding-top: 60px;
+		 }
+		 .sidenav a {
+				padding: 8px 8px 8px 32px;
+				text-decoration: none;
+				font-size: 25px;
+				color: #818181;
+				display: block;
+				transition: 0.3s;
+		 }
+		 .sidenav a:hover {
+    		color: #f1f1f1;
+		 }
+		 .sidenav .closebtn {
+    		position: absolute;
+    		top: 0;
+    		right: 25px;
+    		font-size: 36px;
+    		margin-left: 50px;
+		 }
+		 @media screen and (max-height: 450px) {
+  		.sidenav {padding-top: 15px;}
+  		.sidenav a {font-size: 18px;}
+		 }
+	 </style>
+</head>
+   
+<body>
+	 
+	 <div id="wrapper">	 
+		 <span id="over" style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776; Menu</span>
+		 <div id="map"></div>
+		 <div id="mySidenav" class="sidenav">
+			 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			 <a href="#">Filter</a>
+			 <a href="#">Offers</a>
+			 <a href="#">Collectibles</a>
+			 <a href="#">Useful Info</a>
+		 </div>
+	 </div>	
+	
+	 <script>
+			// global vars
+			var data = [];
+		 
+		  // set screen height
+		  var screenHeight = screen.height;
+		  var mapDiv = document.getElementById("map");
+		  mapDiv.style.height = screenHeight + "px";
+		   
+		 	// get google sheet data csv
+			$.ajax({
+				url : "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8cVT-8iBctOJpAM-Qerq0R8fMWwSXRf8XPTUxNaNS19O3-uhv5hU8F62qQyZj0koqusJIpAQx2yEJ/pub?output=csv",
+				success : function(result) {
+					//console.log(result);
+					var resArr = result.split(",");
+					// cycle through and tidy up
+					var sliceArr;
+					for (var i = 6; i < resArr.length; i++) {
+						 if (resArr[i] == "") {
+								sliceArr = resArr.slice(6, i);
+								break;
+						 }
+					} 
+					// move all the good data across
+					for (var d = 0; d < sliceArr.length; d = d + 6) {
+						 data.push([sliceArr[d],sliceArr[d+1],sliceArr[d+2],sliceArr[d+3],sliceArr[d+4]]);
+					}
+				}
+			});
+			
+			// init map
+      function initMap() {
+        var uluru = {lat: 54.450642, lng: -6.647845};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: uluru,
+					gestureHandling: 'greedy',
+					scrollwheel: true,
+  				zoomControl: true,
+					disableDefaultUI: false,
+					mapTypeControl: false,
+          styles: [
+              {"featureType":"all","elementType":"geometry","stylers":[{"color":"#cba15f"}]},
+              {"featureType":"all","elementType":"labels.text.fill","stylers":[{"gamma":0.01},{"lightness":20}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"saturation":-31},{"lightness":-33},{"weight":2},{"gamma":0.8}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+              {"featureType":"landscape","elementType":"geometry","stylers":[{"lightness":30},{"saturation":30},{"visibility":"on"},{"color":"#cea76a"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"saturation":20},{"color":"#9a7b40"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"lightness":20},{"saturation":-20}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":10},{"saturation":-30}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"saturation":25},{"lightness":25}]},{"featureType":"water","elementType":"all","stylers":[{"lightness":-20}]},
+              {"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#17263c"},{"saturation":"-5"},{"lightness":"8"}]}
+          ]
+        });
+				
+				setTimeout(function() {
+					addInfo(map, data);
+				}, 3000);
+      }
+			
+			// add marker
+			function addInfo(map, data) {
+				 
+				 console.log(data);
+				 
+				 // local vars
+				 var infowindow = new google.maps.InfoWindow();
+				 var marker;
+				 
+				 // set data
+				 for (var i = 0; i < data.length; i++) {
+						if (data[i][1] != null) {
+							 var geo = {lat: parseFloat(data[i][3]), lng: parseFloat(data[i][4])};
+							 
+							 marker = new google.maps.Marker({
+								 position: geo,
+								 map: map,
+								 title: data[i][1]
+							 });
+							 console.log(data[i][0]);
+							 
+							 var colour = "#FFFFFF";
+							 if (data[i][0].includes('Site')) {
+									colour = "#edfb0d";
+							 } else if (data[i][0].includes('Walk')) {
+   								colour = "#df2a2a";
+							 } else if (data[i][0].includes('Tour')) {
+									colour = "#45f41e";
+							 } else {
+									colour = "#FFFFFF";
+							 }
+							 var circle = new google.maps.Circle({
+									strokeColor: colour,
+									strokeOpacity: 0.8,
+									strokeWeight: 2,
+									fillColor: colour,
+									fillOpacity: 0.35,
+									map: map,
+									center: marker.getPosition(),
+									radius: 10000
+          		 });
+
+							 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        				return function() {
+          				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">'+ data[i][0].substring(2) +': '+ data[i][1] +'</h2>'+
+            			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Co-ordinates: '+ data[i][3] +', '+ data[i][4] +'</p></div></div>');
+          				infowindow.open(map, marker);
+        				}
+      				})(marker, i));
+						}
+				 }
+			}
+		 
+		 	function openNav() {
+					document.getElementById("mySidenav").style.width = "250px";
+			}
+
+			function closeNav() {
+					document.getElementById("mySidenav").style.width = "0";
+			}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEhjUiJyOzQy6kEPVKAiMKCVtwozfWHnE&callback=initMap">
+    </script>
+    <script>
+    
+    </script>
+</body>
+</html>
