@@ -5,7 +5,12 @@
 	 <link rel="icon" href="https://pbs.twimg.com/profile_images/3161261547/27c23bdd007a89aac9dca076b6d3460f_400x400.jpeg">
 	 <title>NI Tourism Proto</title>
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 <script src="./libs/turnjs4/lib/turn.js"></script>
+	 <style stylesheet="./libs/turnjs4/css/basic.css"></style>
 	 <style>
+		 body {
+			  background-color: #17263c;
+		 }
 		 #map {
  				/*height: 100%;*/
  				width: 100%;
@@ -26,10 +31,28 @@
 				z-index: 1;
 				top: 0;
 				left: 0;
-				background-color: #111;
+				background-color: #17263c;
 				overflow-x: hidden;
 				transition: 0.5s;
 				padding-top: 60px;
+		 }
+		 .sidedetail {
+				height: 100%;
+				width: 0;
+				position: fixed;
+				z-index: 1;
+				top: 0;
+				right: 0;
+				background-color: #17263c;
+				overflow-x: hidden;
+				transition: 0.5s;
+				padding-top: 60px;
+		 }
+		 .displayBox {
+			 	margin: 0 auto;
+     		width: 90%;
+			  height: 80%;
+			  border: 0px solid white;
 		 }
 		 .sidenav a {
 				padding: 8px 8px 8px 32px;
@@ -53,6 +76,49 @@
   		.sidenav {padding-top: 15px;}
   		.sidenav a {font-size: 18px;}
 		 }
+		 .bookStyle {
+			 	background-color: mintcream;
+		 }
+		 .textCenter {
+			  text-align: center;
+			  color: white;
+			  padding-top: 10%;
+			  font-weight: 900;
+			  font-size: 30px;
+		 }
+		 
+		  /*  SECTIONS  */
+			.section {
+				clear: both;
+				padding: 0px;
+				margin: 0px;
+			}
+
+			/*  COLUMN SETUP  */
+			.col {
+				display: block;
+				float:left;
+				height: 250px;
+				margin: 1% 0 1% 0.8%;
+			}
+			.col:first-child { margin-left: 0; }
+
+			/*  GROUPING  */
+			.group:before,
+			.group:after { content:""; display:table; }
+			.group:after { clear:both;}
+			.group { zoom:1; /* For IE 6/7 */ }
+		 
+		  /*  GRID OF THREE  */
+			.span_3_of_3 { width: 100%; }
+			.span_2_of_3 { width: 66.4%; }
+			.span_1_of_3 { width: 32.8%; }
+
+			/*  GO FULL WIDTH BELOW 480 PIXELS */
+			@media only screen and (max-width: 480px) {
+				.col {  margin: 1% 0 1% 0%; }
+				.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
+			}
 	 </style>
 </head>
    
@@ -63,10 +129,13 @@
 		 <div id="map"></div>
 		 <div id="mySidenav" class="sidenav">
 			 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			 <a href="#">Filter</a>
-			 <a href="#">Offers</a>
-			 <a href="#">Collectibles</a>
-			 <a href="#">Useful Info</a>
+			 <a onclick="openFilter()">Filter</a>
+			 <a onclick="openOffers()">Offers</a>
+			 <a onclick="openCollectibles()">Collectibles</a>
+			 <a onclick="openInfo()">Useful Info</a>
+		 </div>
+		 <div id="innerDisplay" class="sidedetail">
+			 <div id="displayArea" class="displayBox"></div>
 		 </div>
 	 </div>	
 	
@@ -146,12 +215,18 @@
 							 console.log(data[i][0]);
 							 
 							 var colour = "#FFFFFF";
-							 if (data[i][0].includes('Site')) {
+							 if (data[i][0].includes('Attraction')) {
 									colour = "#edfb0d";
 							 } else if (data[i][0].includes('Walk')) {
    								colour = "#df2a2a";
 							 } else if (data[i][0].includes('Tour')) {
 									colour = "#45f41e";
+							 } else if (data[i][0].includes('Dining')) {
+   								colour = "#8816c1";
+							 } else if (data[i][0].includes('Shop')) {
+   								colour = "#ec4aef";
+							 } else if (data[i][0].includes('Activity')) {
+   								colour = "#10d8f7";
 							 } else {
 									colour = "#FFFFFF";
 							 }
@@ -169,7 +244,7 @@
 							 google.maps.event.addListener(marker, 'click', (function(marker, i) {
         				return function() {
           				infowindow.setContent('<div id="content"><h2 id="firstHeading" class="firstHeading">'+ data[i][0].substring(2) +': '+ data[i][1] +'</h2>'+
-            			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Co-ordinates: '+ data[i][3] +', '+ data[i][4] +'</p></div></div>');
+            			'<div id="bodyContent"><p>Info: '+ data[i][2] +'</p><p>Link: http://www.toSite.com/</p><p>Co-ordinates: '+ data[i][3] +', '+ data[i][4] +'</p></div></div>');
           				infowindow.open(map, marker);
         				}
       				})(marker, i));
@@ -178,12 +253,87 @@
 			}
 		 
 		 	function openNav() {
-					document.getElementById("mySidenav").style.width = "250px";
+				document.getElementById("mySidenav").style.width = "25%";
+				document.getElementById("innerDisplay").style.width = "70%";
+				openOffers();
 			}
 
 			function closeNav() {
-					document.getElementById("mySidenav").style.width = "0";
+				document.getElementById("mySidenav").style.width = "0%";
+				document.getElementById("innerDisplay").style.width = "0%";
 			}
+		 
+		  function openFilter() {
+				// clear div
+				var dis = document.getElementById("displayArea");
+				dis.innerHTML = "";
+				
+				dis.innerHTML = '<div class="section group"> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(https://36iusc2tb88y2g492si2bqd1-wpengine.netdna-ssl.com/wp-content/uploads/2018/02/walking.jpg)"><p class="textCenter">Walking</p></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(http://www.gameofthronestours.com/wp-content/uploads/2015/07/Belfast_winterfell_map-compressor.jpg)"><p class="textCenter">Tours</p></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(https://www.irishnews.com/picturesarchive/irishnews/irishnews/2017/12/18/171217481-a9f9d413-0b69-4b34-ad31-30ba9496165f.jpg)"><p class="textCenter">Attraction</p></div> \
+													<div class="col span_1_of_3" style="margin:1% 0% 0% 0%;background-size:100% 100%;background-image:url(https://st2.depositphotos.com/1037987/9821/i/950/depositphotos_98217000-stock-photo-friends-eating-dinner-at-rooftop.jpg)"><p class="textCenter">Dining</p></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(https://www.e-architect.co.uk/images/jpgs/switzerland/westside_shopping_leisure_center_sdl200907_nk.jpg)"><p class="textCenter">Shop</p></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(https://images.buyagift.co.uk/common/client/Images/Product/Extralarge/en-GB/10144276-5_extralarge.jpg)"><p class="textCenter">Activity</p></div> \
+		 										</div>';
+				
+			}
+		 
+		  function openOffers() {
+				// clear div
+				var dis = document.getElementById("displayArea");
+				dis.innerHTML = "";
+				
+				dis.innerHTML = '<div class="section group"> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(./assets/OfferPhoto1.jpg)"></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(./assets/OfferPhoto2.jpg)"></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(./assets/OfferPhoto3.jpg)"></div> \
+													<div class="col span_1_of_3" style="margin:1% 0% 0% 0%;background-size:100% 100%;background-image:url(./assets/OfferPhoto4.jpg)"></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(./assets/OfferPhoto5.jpg)"></div> \
+													<div class="col span_1_of_3" style="background-size:100% 100%;background-image:url(./assets/OfferPhoto6.jpg)"></div> \
+		 										</div>';
+			}
+		 
+		  function openCollectibles() {
+				// clear div
+				var dis = document.getElementById("displayArea");
+				dis.innerHTML = "";
+				
+				// add flip book
+				dis.innerHTML = "<div id='flipbook'> \
+													<div class='hard bookStyle' style='background-size:100% 100%;background-image:url(./assets/FrameBookPage.jpg)'></div> \
+													<div class='hard bookStyle' style='background-size:100% 100%;background-image:url(./assets/FrameCardsPage.jpg)'></div> \
+													<div class='bookStyle' style='background-size:100% 100%;background-image:url(./assets/FrameCardsPage.jpg)'></div> \
+													<div class='bookStyle' style='background-size:100% 100%;background-image:url(./assets/FrameCardsPage.jpg)'></div> \
+													<div class='bookStyle' style='background-size:100% 100%;background-image:url(./assets/FrameCardsPage.jpg)'></div> \
+													<div class='hard bookStyle' style='background-size:100% 100%;background-image:url(./assets/FrameBookPage.jpg)'></div> \
+												</div>";
+				
+				$("#flipbook").turn({
+					width: dis.offsetWidth,
+					height: dis.offsetHeight,
+					autoCenter: true
+				});
+			}
+		 
+		 function openInfo() {
+				// clear div
+				var dis = document.getElementById("displayArea");
+				dis.innerHTML = "";
+
+				// add flip book
+				dis.innerHTML = '<div class="flipbook-viewport"><div class="container"><div class="flipbook"> \
+													<div style="background-size:100% 100%;background-image:url(./assets/ExamplePage1.jpg)"></div> \
+													<div style="background-size:100% 100%;background-image:url(./assets/ExamplePage2.jpg)"></div> \
+													<div style="background-size:100% 100%;background-image:url(./assets/ExamplePage3.jpg)"></div> \
+												</div></div></div>';
+
+				$(".flipbook").turn({
+					width: dis.offsetWidth, 
+					height: dis.offsetHeight,
+					autoCenter: true
+				});
+		 }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEhjUiJyOzQy6kEPVKAiMKCVtwozfWHnE&callback=initMap">
