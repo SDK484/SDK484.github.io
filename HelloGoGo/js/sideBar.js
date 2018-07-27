@@ -22,9 +22,9 @@ function addSideBarComponent(pageId) {
     sideBar.innerHTML = '<ul id="slide-out" class="sidenav purple darken-2"> \
                           <li><div class="user-view"> \
                             <div class="background"> \
-                              <img src="../assets/material-background.png"> \
+                              <img src="./assets/material-background.png"> \
                             </div> \
-                            <a><img class="circle" src="../assets/user.png"></a> \
+                            <a><img class="circle" src="./assets/user.png"></a> \
                             <a><span class="white-text email"><b>'+getCookie("email")+'</b></span></a> \
                             <a><span class="white-text" onClick="deleteCookies();"><b>Sign Out</b></span></a> \
                           </div></li> \
