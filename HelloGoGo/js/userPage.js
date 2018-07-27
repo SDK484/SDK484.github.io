@@ -1,5 +1,8 @@
 /* User Page Component */
 
+// Global Vars
+var address = "https://sdk484.github.io/HelloGoGo";
+
 // add user page component
 function addUserPageComponent() {
 
@@ -113,7 +116,7 @@ function receiveLogin() {
     // check login was found
     if (bool) {
       setCookie("email", cookieEmail, 3);
-      window.location = "../index.html?user";
+      window.location = address+"/index.html?user";
     } else {
       alert("Login was unsuccessful - please try again");
     }
@@ -150,7 +153,7 @@ function createNewDoc() {
   // post data
   $.ajax(CREATE_NEW_USER).done(function (response) {
     setCookie("email", cookieEmail, 3);
-    window.location = "../index.html?user";
+    window.location = address+"/index.html?user";
   });
 }
 
