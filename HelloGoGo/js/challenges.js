@@ -12,7 +12,7 @@ function challengeCards() {
     cardsBox.innerHTML += '<div class="inputBox"> \
                             <div class="card"> \
                               <div class="card-image waves-effect waves-block waves-light"> \
-                                <img id="challImg'+(i+1)+'" class="activator" src="../assets/'+challArray[i][0]+'"> \
+                                <img id="challImg'+(i+1)+'" class="activator" src="./assets/'+challArray[i][0]+'"> \
                               </div> \
                               <div class="card-content"> \
                                 <span class="card-title activator grey-text text-darken-4">Challenge '+(i+1)+'<i class="material-icons right">more_vert</i></span> \
@@ -21,7 +21,7 @@ function challengeCards() {
                               <div class="card-reveal"> \
                                 <span class="card-title grey-text text-darken-4">Challenge '+(i+1)+'<i class="material-icons right">close</i></span> \
                                 <p>Find this site at the following point</p> \
-                                <div><img id="challImgTemp'+(i+1)+'" src="../assets/'+challArray[i][1]+'"></div> \
+                                <div><img id="challImgTemp'+(i+1)+'" src="./assets/'+challArray[i][1]+'"></div> \
                                 <div><input type="file" id="fileInput'+(i+1)+'" accept="image/*" /></div> \
                                 <canvas id="canvasOutput'+(i+1)+'"></canvas> \
                                 <div class="mapBox" id="mapChall'+(i+1)+'"></div> \
