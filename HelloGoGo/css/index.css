@@ -1,0 +1,38 @@
+/* Style for whole html page */
+
+@font-face {
+  font-family: DolbakBrush;
+  src: url('./fonts/DolbakBrush/TheDolbak-Brush.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url('./fonts/Roboto/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: RobotoBold;
+  src: url('./fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: LaunchAttack;
+  src: url('./fonts/LaunchAttack/LaunchAttack.otf') format('opentype');
+}
+
+html {
+  background-color: #9c9fa3;
+  font-family: Roboto;
+}
+
+.fontTitle {
+  font-family: LaunchAttack;
+}
+
+.robotoBold {
+  font-family: RobotoBold;
+}
+
+.modalCentre {
+  text-align: center;
+}

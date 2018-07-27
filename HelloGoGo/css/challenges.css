@@ -1,0 +1,16 @@
+/* Style for challenges */
+
+.card {
+  float: left;
+}
+
+.mapBox {
+  height: 200px;
+  width: 200px;
+  border: 1px solid grey;
+}
+
+.inputBox {
+  display: inline-block;
+  padding: 32px 20px 0px 20px;
+}

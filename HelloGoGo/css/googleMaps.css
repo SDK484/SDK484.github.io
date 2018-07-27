@@ -1,0 +1,17 @@
+/* Style for Google Maps */
+
+#mapBox {
+  width: 100%;
+  height: 95vh;
+}
+
+#couponBox {
+  width: 50%;
+  height: 150px;
+  border: 1px dashed black;
+}
+
+#barcode {
+  width: 100%;
+  height: 90%;
+}

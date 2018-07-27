@@ -1,0 +1,35 @@
+/* Style for Side Bar */
+
+.fontColor {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+#hidMenuBar {
+  display: none;
+}
+
+.spanText {
+  float: left;
+}
+
+.spanInput {
+  float: right
+}
+
+.inputRange {
+  width: 150px;
+}
+
+.inputTags {
+  width: 150px;
+}
+
+.inputKeyword {
+  width: 150px;
+}
+
+.chip {
+  height: 30px;
+  font-size: 9px;
+}

@@ -1,0 +1,15 @@
+/* Style for Nav Bar */
+
+#logoMenu {
+  padding-left: 2%;
+  font-size: 22px;
+}
+
+#infoTab {
+  padding-right: 5%;
+}
+
+#search {
+  border-right: 2px solid white;
+  border-left: 2px solid white;
+}
