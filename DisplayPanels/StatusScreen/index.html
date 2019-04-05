@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>StatusScreen</title>
+	<meta name="author" content="Steven K">
+	<meta name="description" content="Cyber UI theme">
+	<meta name="keywords" content="cyber,ui">
+	<!-- Google Icon Fonts -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<!-- css -->
+	<link type="text/css" rel="stylesheet" href="css/index.css"/>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- Packages -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+</head>
+<body>
+
+	<!-- Open Weather Box -->
+	<div id="weatherBox" class="boxPanels boxPanel1"></div>
+	<!-- Open News Box -->
+	<div id="newsBox" class="boxPanels boxPanel2">
+		<div class="boxPanelHead">
+			<div class="boxPanelTitle">News Headlines</div>
+		</div>
+		<div id="newsBoxFeed">
+			<div class="boxPanelData">
+				<div id="newsListTitle"></div>
+				<br/>
+				<div id="newsListDes"></div>
+			</div>
+		</div>
+	</div>
+	<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow_auto-->
+	<!-- Calendar -->
+	<div id="calBox" class="boxPanels boxPanel3">
+	</div>
+	<!-- Map -->
+	<div id="mapBox" class="boxPanels boxPanel4">
+		<div id="map" class="map"></div>
+	</div>
+	
+	<!-- Scripts -->
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+	<script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"
+    integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
+    crossorigin=""></script>
+	<!-- Working Scripts -->
+	<script type="text/javascript" src="js/openWeather.js"></script>
+	<script type="text/javascript" src="js/openNews.js"></script>
+	<script type="text/javascript" src="js/openMaps.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	
+</body>
+</html>
