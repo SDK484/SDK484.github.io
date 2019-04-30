@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Alert App</title>
+	<meta name="author" content="Steven K">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<!-- css -->
+	<style>
+		.btnDiv {
+			position: relative;
+			top: 20vh;
+		}
+		.circle {
+			width: 50%;
+			height: 50vh;
+			border-radius: 50%;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 50vh;
+			font-size: 20vh;
+			background-color: red;
+		}
+	</style>
+	<!-- Packages -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+	
+	<!-- Alert Circle -->
+	<div class="btnDiv" align="center">
+		<div class="circle" onclick="alert()">Alert!</div>
+	</div>
+	
+	<!-- Sound File -->
+	<audio id="audio" src="https://www.soundjay.com/mechanical/smoke-detector-1.mp3" autoplay="false"></audio>
+	
+	<!-- Script -->
+	<script>
+		
+		// global vars
+		var boolOn = false;
+		var message = "No problems...";
+		
+		// * Restdb.io *
+		var DB = "https://hellogogo-201b.restdb.io/rest/";
+		var API_KEY = "5b59eacddaa1f051ef3a3ed1";
+		// *************
+		
+		// play sound then text
+		function alert() {
+			// local vars
+			var count = 0;
+			
+			// check whether on or off
+			if (boolOn === true) {
+				boolOn = false;
+				message = "No problems...";
+			} else {
+				boolOn = true;
+				message = "Alert: Emergency detected!";
+			}
+			
+			// send message
+			messSend(boolOn, message);
+			
+			// sound to play
+			var sound = document.getElementById("audio");
+			// start timer
+			if (boolOn === true) {
+				var repeatSound = setInterval(function() { 
+					// play sound
+					sound.play();
+					// add to count
+					count++;
+					// check when done
+					if (count === 5) {
+						// clear timer
+						clearInterval(repeatSound);
+					}
+				}, 1000);
+			}
+		}
+		
+		// message 
+		function messSend(boolDis, mess) {
+			var jsondata = {"toDisplay": boolDis, "message": mess};
+			
+			var settings = {
+				"async": true,
+				"crossDomain": true,
+				"url": "https://hellogogo-201b.restdb.io/rest/test-alert/5cc85a00a7c1e0730005a973",
+				"method": "PUT",
+				"headers": {
+					"content-type": "application/json",
+					"x-apikey": API_KEY,
+					"cache-control": "no-cache"
+				},
+				"processData": false,
+				"data": JSON.stringify(jsondata)
+			}
+			
+			$.ajax(settings).done(function (response) {
+				console.log("The alarm is set to: " + boolDis);
+			});
+		}
+	
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Message App</title>
+	<meta name="author" content="Steven K">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<!-- css -->
+	<style>
+		.boxDiv {
+			position: relative;
+			top: 20vh;
+		}
+		.box {
+			width: 50%;
+			height: 50vh;
+			border: 2px dotted black;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 50vh;
+			font-size: 5vh;
+			font-weight: bold;
+		}
+	</style>
+	<!-- Packages -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+	
+	<!-- Alert Box -->
+	<div class="boxDiv" align="center">
+		<div id="boxMess" class="box">.....</div>
+	</div>
+	
+	<!-- Script -->
+	<script>
+		// global var
+		var messData;
+		
+		// * Restdb.io *
+		var DB = "https://hellogogo-201b.restdb.io/rest/";
+		var API_KEY = "5b59eacddaa1f051ef3a3ed1";
+		// *************
+		
+		// cycle every x seconds to check
+		var repeatTask = setInterval(function() {
+			// get data
+			var GET_DATA = {
+				"async": true,
+				"crossDomain": true,
+				"url": DB+"/test-alert",
+				"method": "GET",
+				"headers": {
+					"content-type": "application/json",
+					"x-apikey": API_KEY,
+					"cache-control": "no-cache"
+				}
+			}
+			// send and get response
+			// change message
+			$.ajax(GET_DATA).done(function (response) {
+				// response
+				messData = {
+					toDisplay: response[0].toDisplay,
+					message: response[0].message
+				};
+				// change data on screen
+				var boxRef = document.getElementById("boxMess");
+				// get colour of message
+				var colorDis = "";
+				if (messData.toDisplay === false) {
+					colorDis = "green";
+				} else {
+					colorDis = "red";
+				}
+				// set message
+				boxRef.innerHTML = "[!] " + messData.message;
+				boxRef.style.color = colorDis;
+				// log to console
+				console.log(messData);
+			});
+		}, 2000);
+		
+		
+	
+	</script>
+	
+</body>
+</html>
