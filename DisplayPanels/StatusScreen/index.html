@@ -13,6 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<!-- css -->
 	<link type="text/css" rel="stylesheet" href="css/index.css"/>
+	<link type="text/css" rel="stylesheet" href="css/slide.css"/>
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<!-- Packages -->
@@ -23,23 +24,43 @@
 <body>
 
 	<!-- Open Weather Box -->
-	<div id="weatherBox" class="boxPanels boxPanel1"></div>
+	<div id="weatherBox" class="boxPanels boxPanel1">
+		<div class="boxPanelHead">
+			<div id="locationDetails" class="boxPanelTitle">Weather Report:</div>
+		</div>
+	</div>
 	<!-- Open News Box -->
 	<div id="newsBox" class="boxPanels boxPanel2">
 		<div class="boxPanelHead">
 			<div class="boxPanelTitle">News Headlines</div>
 		</div>
-		<div id="newsBoxFeed">
-			<div class="boxPanelData">
-				<div id="newsListTitle"></div>
-				<br/>
-				<div id="newsListDes"></div>
-			</div>
+		<div id="newsBoxFeed"></div>
+		<br>
+		<div style="text-align:center">
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
+			<span class="dot dotNews"></span>
 		</div>
 	</div>
-	<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow_auto-->
-	<!-- Calendar -->
-	<div id="calBox" class="boxPanels boxPanel3">
+	<!-- Info -->
+	<div id="infoBox" class="boxPanels boxPanel3">
+		<div class="boxPanelHead">
+			<div id="infoDetails" class="boxPanelTitle">
+				Info
+				<span id="infoDetailsDate"></span>
+				<span id="infoDetailsTime"></span>
+			</div>
+		</div>
+		<div class="boxPanelBody">
+			<iframe class="iframeBox" src="https://www.bing.com/search?q=restaurents+lisburn&qs=n&form=QBLH&sp=-1&pq=restaurents+lisburn&sc=8-19&sk=&cvid=CEA488585BA24A7093D03F8D056AD2BF"></iframe> 
+		</div>
 	</div>
 	<!-- Map -->
 	<div id="mapBox" class="boxPanels boxPanel4">

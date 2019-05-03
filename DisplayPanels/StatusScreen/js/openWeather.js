@@ -14,19 +14,11 @@ function addWeatherBox() {
 		// day and show various stats
 		var dataArrayCityStats = data.city;
 		var dataArrayWeather = data.list;
+		// add title
+		var locDetails = document.getElementById("locationDetails");
+		locDetails.innerHTML += " " + dataArrayCityStats.name + "," + dataArrayCityStats.country + " - pop. " + dataArrayCityStats.population;
 		dataArrayWeather.forEach(function(dayData) {
-			//console.log(dayData);
+			console.log(dayData);
 		});
 	});
-	// get element
-	/*var ele = document.getElementById('weatherBox');
-	// component
-	ele.innerHTML = '<table> \
-						<tr> \
-							<td>WEATHER REPORT</td> \
-						</tr> \
-						<tr> \
-							<td>today: </td> \
-						</tr> \
-					</table>';*/
 }
