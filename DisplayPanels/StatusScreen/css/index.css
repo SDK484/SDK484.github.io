@@ -22,6 +22,7 @@ div {
 }
 
 .boxPanelHead {
+	position: relative;
 	border-bottom: 2.5px solid #42ebf4;
 	height: 20%;
 	font-size: 2vw;
@@ -38,7 +39,26 @@ div {
 
 .boxPanelData {
 	padding: 30px 40px;
-	font-size: 2vw;
+	font-size: 1.7vw;
+}
+
+.boxPanelDes {
+	position: relative;
+	height: 40%;
+}
+
+.boxPanelDesDotNews {
+	position: absolute;
+	bottom: 10px;
+	left: 25%;
+	/*text-align: center;*/
+}
+
+.boxPanelDesDotWeather {
+	position: absolute;
+	bottom: 10px;
+	left: 39%;
+	/*text-align: center;*/
 }
 
 .boxPanel1 {
@@ -71,6 +91,17 @@ div {
 	right: 0;
 	margin-bottom: 5px;
 	margin-right: 5px;
+}
+
+.weatherTable {
+	width: 100%;
+	height: 28vh;
+}
+
+.weatherTableCell {
+	padding-left: 30px; 
+	font-size: 1vw;
+	border: 2.5px solid #42ebf4;
 }
 
 .map {

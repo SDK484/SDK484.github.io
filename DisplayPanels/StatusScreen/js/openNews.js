@@ -16,7 +16,7 @@ function addNewsBox() {
 		dataArray.forEach(function(article) {
 			//console.log(article);
 			newsBoxFeed.innerHTML += ' \
-				<div class="mySlides fade"> \
+				<div class="newsSlides fade"> \
 					<div class="boxPanelData"> \
 						<div><b>'+article.title+'</b></div> \
 						<br/> \
@@ -24,27 +24,7 @@ function addNewsBox() {
 					</div> \
 				</div>';
 		});
-		//
-		showSlides();
+		// cycle through news stories
+		showSlidesNews();
 	});
-}
-
-// slide show
-var slideIndex = 0;
-
-function showSlides() {
-	var i;
-	var slides = document.getElementsByClassName("mySlides");
-	var dots = document.getElementsByClassName("dotNews");
-	for (i = 0; i < slides.length; i++) {
-		slides[i].style.display = "none";  
-	}
-	slideIndex++;
-	if (slideIndex > slides.length) {slideIndex = 1}    
-	for (i = 0; i < dots.length; i++) {
-		dots[i].className = dots[i].className.replace(" active", "");
-	}
-	slides[slideIndex-1].style.display = "block";  
-	dots[slideIndex-1].className += " active";
-	setTimeout(showSlides, 8000); // Change image every 8 seconds
 }

@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
    crossorigin=""/>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 </head>
 <body>
 
@@ -28,15 +29,23 @@
 		<div class="boxPanelHead">
 			<div id="locationDetails" class="boxPanelTitle">Weather Report:</div>
 		</div>
+		<div id="weatherBoxFeed" class="boxPanelDes"></div>
+		<div class="boxPanelDesDotWeather">
+			<span class="dot dotWeather"></span>
+			<span class="dot dotWeather"></span>
+			<span class="dot dotWeather"></span>
+			<span class="dot dotWeather"></span>
+			<span class="dot dotWeather"></span>
+			<span class="dot dotWeather"></span>
+		</div>
 	</div>
 	<!-- Open News Box -->
 	<div id="newsBox" class="boxPanels boxPanel2">
 		<div class="boxPanelHead">
 			<div class="boxPanelTitle">News Headlines</div>
 		</div>
-		<div id="newsBoxFeed"></div>
-		<br>
-		<div style="text-align:center">
+		<div id="newsBoxFeed" class="boxPanelDes"></div>
+		<div class="boxPanelDesDotNews">
 			<span class="dot dotNews"></span>
 			<span class="dot dotNews"></span>
 			<span class="dot dotNews"></span>
@@ -59,7 +68,7 @@
 			</div>
 		</div>
 		<div class="boxPanelBody">
-			<iframe class="iframeBox" src="https://www.bing.com/search?q=restaurents+lisburn&qs=n&form=QBLH&sp=-1&pq=restaurents+lisburn&sc=8-19&sk=&cvid=CEA488585BA24A7093D03F8D056AD2BF"></iframe> 
+			<iframe class="iframeBox" src="https://www.bing.com/search?q=lisburn+restaurants&qs=AS&pq=lisburn+res&sc=8-11&cvid=CAFAD45C9DDF4B128AB40060201F3F81&FORM=QBLH&sp=1&ghc=1"></iframe> 
 		</div>
 	</div>
 	<!-- Map -->
