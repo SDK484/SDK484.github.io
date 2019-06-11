@@ -1,0 +1,68 @@
+/* html */
+
+html {
+	background-image: url("../img/nitroGif.gif");
+	width: 100vw;
+	height: 100vh;
+	background-size: cover;
+	background-color: black;
+	font-family: "Open Sans",Arial,sans-serif;
+}
+
+/* Divider */
+
+.divider {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	border-left: 6px solid white;
+  height: 80vh;
+}
+
+/* Logo */
+
+.logo {
+	position: absolute;
+	top: 14%;
+	left: 8%;
+	width: 40%;
+	height: 70%;
+	color: white;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	text-align: center;
+	border: 0px solid red;
+}
+
+.logoSteamAnimate {
+	animation-duration: 3s;
+	animation-delay: 2s;
+	animation-iteration-count: infinite;
+}
+
+.logoText {
+	font-size: 4.2vh;
+}
+
+.logoImg {
+	width: 24vw;
+	height: 24vh;
+}
+
+.logoDiv {
+	position: relative;
+	top: 24%;
+	text-align: center;
+}
+
+/* Menu */
+
+.menu {
+	position: absolute;
+	top: 14%;
+	right: 8%;
+	width: 35%;
+	color: white;
+	font-size: 6vh;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	border: 0px solid red;
+}
