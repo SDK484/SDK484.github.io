@@ -58,11 +58,12 @@ html {
 
 .menu {
 	position: absolute;
-	top: 14%;
+	top: 7%;
 	right: 8%;
 	width: 35%;
 	color: white;
-	font-size: 6vh;
+	font-size: 3.5vh;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 	border: 0px solid red;
 }
+
