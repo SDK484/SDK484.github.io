@@ -24,14 +24,21 @@ $.ajax({
 		
 		// get menu and add data
 		var menu = document.getElementById("menu");
+		var dash = "-";
 		for (var i = 0; i < data.length-1; i++) {
 			var drink = data[i][0].substring(1);
+			var drinkLen = drink.length;
 			var price = data[i][1];
 			if (drink !== undefined) {
 				// add new menu list
 				var dataItem = document.createElement("p");
 				dataItem.className = "tlt";
-				dataItem.innerHTML = drink+" --- "+price;
+				var dashItem = dash.repeat(5);
+				if (drinkLen <= 17) {
+					var d = (17 - drink.length) + 3;
+					dashItem += dash.repeat(d);
+				}
+				dataItem.innerHTML = drink+" "+dashItem+" "+price;
 				menu.appendChild(dataItem);
 			}
 		}
