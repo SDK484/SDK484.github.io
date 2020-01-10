@@ -110,5 +110,12 @@ particlesJS("particles-js", {
   "retina_detect": true
 });
 
-// fireworks
-//https://codepen.io/tag/fireworks/
+function fadeGif() {
+	$("#gifBox1").each(function(index) {
+		$(this).hide();
+		$(this).delay(10000 * index).fadeIn(10000).fadeOut();
+	});
+}
+setInterval(function() {
+	fadeGif();
+}, 20000);

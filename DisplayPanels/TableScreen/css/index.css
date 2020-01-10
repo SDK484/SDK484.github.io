@@ -32,7 +32,7 @@ canvas {
 .column {
   float: left;
   width: 23%;
-	height: 20vh;
+	height: 24vh;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
 	border: 0px solid white;
@@ -58,20 +58,28 @@ canvas {
   }
 }
 
+.img {
+	position: relative;
+	top: -10px;
+	left: -125px;
+}
+
 .fireworks {
 	height: 100vh;
 	width: 100%;
 	border: 0px solid white;
 }
 
-#videoBox {
+#gifBox1 {
 	position: fixed;
 	top: 30px;
 	right: 100px;
 }
 
-.video-circle {
+.boxCircle {
+	width: 200px;
+	height: 200px;
 	border-radius: 50%;
 	object-fit: cover;
+	display: none;
 }
-

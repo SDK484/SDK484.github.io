@@ -1,5 +1,7 @@
 $.getJSON("./table.json", function(tab) {
 	
+	// get imgs
+	var imgs = tab.Imgs;
 	// get Top Table
 	var topTable = tab.TopTable;
 	var topId = document.getElementById("topTable");
@@ -24,9 +26,9 @@ $.getJSON("./table.json", function(tab) {
 	topId.appendChild(paraContent);
 	
 	// get Tables
-	// first section
 	var tables = tab.Tables;
 	var tablesId = document.getElementById("tables");
+	// first section
 	// row
 	var row = document.createElement("div");
 	row.className = "row";
@@ -37,7 +39,7 @@ $.getJSON("./table.json", function(tab) {
 		// header
 		var paraHeader = document.createElement("div");
 		paraHeader.style.position = "relative";
-		paraHeader.style.top = "10px";
+		paraHeader.style.top = "17px";
 		paraHeader.innerHTML = tables[i][0];
 		if (i % 2 === 0) {
 			paraHeader.className = "animated infinite tada slower delay-2s";
@@ -46,11 +48,17 @@ $.getJSON("./table.json", function(tab) {
 		}
 		paraHeader.style.fontSize = "1em";
 		col.appendChild(paraHeader);
+		// img
+		var img = document.createElement("img");
+		img.className = "img";
+		img.src = "img/"+imgs[i];
+		img.style.border = "1px solid gold";
+		col.appendChild(img);
 		// content
 		for (var d = 1; d < tables[i].length;) {
 			var paraContent = document.createElement("div");
 			paraContent.style.position = "relative";
-			paraContent.style.top = "20px";
+			paraContent.style.top = "13px";
 			var div1 = document.createElement("div");
 			var div2 = document.createElement("div");
 			div1.innerHTML = tables[i][d];
@@ -81,7 +89,7 @@ $.getJSON("./table.json", function(tab) {
 		// header
 		var paraHeader = document.createElement("div");
 		paraHeader.style.position = "relative";
-		paraHeader.style.top = "10px";
+		paraHeader.style.top = "17px";
 		paraHeader.innerHTML = tables[i][0];
 		if (i % 2 === 0) {
 			paraHeader.className = "animated infinite tada slower delay-2s";
@@ -90,11 +98,17 @@ $.getJSON("./table.json", function(tab) {
 		}
 		paraHeader.style.fontSize = "1em";
 		col.appendChild(paraHeader);
+		// img
+		var img = document.createElement("img");
+		img.className = "img";
+		img.src = "img/"+imgs[i];
+		img.style.border = "1px solid gold";
+		col.appendChild(img);
 		// content
 		for (var d = 1; d < tables[i].length;) {
 			var paraContent = document.createElement("div");
 			paraContent.style.position = "relative";
-			paraContent.style.top = "20px";
+			paraContent.style.top = "13px";
 			var div1 = document.createElement("div");
 			var div2 = document.createElement("div");
 			div1.innerHTML = tables[i][d];
