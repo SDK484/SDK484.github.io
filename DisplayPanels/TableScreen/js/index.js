@@ -110,6 +110,7 @@ particlesJS("particles-js", {
   "retina_detect": true
 });
 
+/*
 function fadeGif() {
 	$("#gifBox1").each(function(index) {
 		$(this).hide();
@@ -119,3 +120,4 @@ function fadeGif() {
 setInterval(function() {
 	fadeGif();
 }, 20000);
+*/

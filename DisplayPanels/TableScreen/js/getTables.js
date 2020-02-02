@@ -52,28 +52,24 @@ $.getJSON("./table.json", function(tab) {
 		var img = document.createElement("img");
 		img.className = "img";
 		img.src = "img/"+imgs[i];
-		img.style.border = "1px solid gold";
+		img.style.border = "2px solid gold";
 		col.appendChild(img);
 		// content
+		var tabContent = document.createElement("table");
+		tabContent.style.width = "90%";
+		tabContent.style.paddingLeft = "10%";
 		for (var d = 1; d < tables[i].length;) {
-			var paraContent = document.createElement("div");
-			paraContent.style.position = "relative";
-			paraContent.style.top = "13px";
-			var div1 = document.createElement("div");
-			var div2 = document.createElement("div");
-			div1.innerHTML = tables[i][d];
-			div2.innerHTML = tables[i][d+1];
-			div1.style.fontSize = "1em";
-			div2.style.fontSize = "1em";
-			div1.style.float = "left";
-			div2.style.float = "left";
-			div1.style.paddingLeft = "15px";
-			div2.style.paddingLeft = "15px";
-			paraContent.appendChild(div1);
-			paraContent.appendChild(div2);
-			col.appendChild(paraContent);
+			var tabRow = document.createElement("tr");
+			var tabCell1 = document.createElement("td");
+			var tabCell2 = document.createElement("td");
+			tabCell1.innerHTML = tables[i][d];
+			tabCell2.innerHTML = tables[i][d+1];
+			tabRow.appendChild(tabCell1);
+			tabRow.appendChild(tabCell2);
+			tabContent.appendChild(tabRow);
 			d = d + 2;
 		}
+		col.appendChild(tabContent);
 		row.appendChild(col);
 	}
 	tablesId.appendChild(row);
@@ -86,6 +82,7 @@ $.getJSON("./table.json", function(tab) {
 		// column
 		var col = document.createElement("div");
 		col.className = "column";
+		col.style.height = "26vh";
 		// header
 		var paraHeader = document.createElement("div");
 		paraHeader.style.position = "relative";
@@ -97,33 +94,32 @@ $.getJSON("./table.json", function(tab) {
 			paraHeader.className = "animated infinite tada slower delay-4s";
 		}
 		paraHeader.style.fontSize = "1em";
+		if (i === 6) {
+			paraHeader.style.fontSize = "0.85em";		
+		}
 		col.appendChild(paraHeader);
 		// img
 		var img = document.createElement("img");
 		img.className = "img";
 		img.src = "img/"+imgs[i];
-		img.style.border = "1px solid gold";
+		img.style.border = "2px solid gold";
 		col.appendChild(img);
 		// content
+		var tabContent = document.createElement("table");
+		tabContent.style.width = "90%";
+		tabContent.style.paddingLeft = "10%";
 		for (var d = 1; d < tables[i].length;) {
-			var paraContent = document.createElement("div");
-			paraContent.style.position = "relative";
-			paraContent.style.top = "13px";
-			var div1 = document.createElement("div");
-			var div2 = document.createElement("div");
-			div1.innerHTML = tables[i][d];
-			div2.innerHTML = tables[i][d+1];
-			div1.style.fontSize = "1em";
-			div2.style.fontSize = "1em";
-			div1.style.float = "left";
-			div2.style.float = "left";
-			div1.style.paddingLeft = "15px";
-			div2.style.paddingLeft = "15px";
-			paraContent.appendChild(div1);
-			paraContent.appendChild(div2);
-			col.appendChild(paraContent);
+			var tabRow = document.createElement("tr");
+			var tabCell1 = document.createElement("td");
+			var tabCell2 = document.createElement("td");
+			tabCell1.innerHTML = tables[i][d];
+			tabCell2.innerHTML = tables[i][d+1];
+			tabRow.appendChild(tabCell1);
+			tabRow.appendChild(tabCell2);
+			tabContent.appendChild(tabRow);
 			d = d + 2;
 		}
+		col.appendChild(tabContent);
 		row.appendChild(col);
 	}
 	tablesId.appendChild(row);
