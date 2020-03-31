@@ -1,0 +1,247 @@
+.bar {
+  width: 20px;
+  min-height: 10px;
+  margin-right: 1px;
+  box-shadow: 0 10px 15px #000;
+}
+
+.bar:nth-child(0) {
+  background-color: #42ebf4;
+  animation: grow0 1672ms alternate infinite;
+}
+
+@keyframes grow0 {
+  0% {
+    height: 8px;
+  }
+  10% {
+    height: 49px;
+  }
+  20% {
+    height: 82px;
+  }
+  30% {
+    height: 22px;
+  }
+  40% {
+    height: 23px;
+  }
+  50% {
+    height: 94px;
+  }
+  60% {
+    height: 51px;
+  }
+  70% {
+    height: 47px;
+  }
+  80% {
+    height: 48px;
+  }
+  90% {
+    height: 41px;
+  }
+  100% {
+    height: 49px;
+  }
+}
+.bar:nth-child(1) {
+  background-color: #42ebf4;
+  animation: grow1 1724ms alternate infinite;
+}
+
+@keyframes grow1 {
+  0% {
+    height: 33px;
+  }
+  10% {
+    height: 86px;
+  }
+  20% {
+    height: 85px;
+  }
+  30% {
+    height: 85px;
+  }
+  40% {
+    height: 13px;
+  }
+  50% {
+    height: 30px;
+  }
+  60% {
+    height: 88px;
+  }
+  70% {
+    height: 16px;
+  }
+  80% {
+    height: 54px;
+  }
+  90% {
+    height: 28px;
+  }
+  100% {
+    height: 81px;
+  }
+}
+.bar:nth-child(2) {
+  background-color: #42ebf4;
+  animation: grow2 2158ms alternate infinite;
+}
+
+@keyframes grow2 {
+  0% {
+    height: 62px;
+  }
+  10% {
+    height: 46px;
+  }
+  20% {
+    height: 24px;
+  }
+  30% {
+    height: 27px;
+  }
+  40% {
+    height: 60px;
+  }
+  50% {
+    height: 53px;
+  }
+  60% {
+    height: 10px;
+  }
+  70% {
+    height: 57px;
+  }
+  80% {
+    height: 15px;
+  }
+  90% {
+    height: 38px;
+  }
+  100% {
+    height: 28px;
+  }
+}
+.bar:nth-child(3) {
+  background-color: #42ebf4;
+  animation: grow3 1617ms alternate infinite;
+}
+
+@keyframes grow3 {
+  0% {
+    height: 98px;
+  }
+  10% {
+    height: 70px;
+  }
+  20% {
+    height: 32px;
+  }
+  30% {
+    height: 59px;
+  }
+  40% {
+    height: 34px;
+  }
+  50% {
+    height: 67px;
+  }
+  60% {
+    height: 97px;
+  }
+  70% {
+    height: 34px;
+  }
+  80% {
+    height: 64px;
+  }
+  90% {
+    height: 58px;
+  }
+  100% {
+    height: 13px;
+  }
+}
+.bar:nth-child(4) {
+  background-color: #42ebf4;
+  animation: grow4 1734ms alternate infinite;
+}
+
+@keyframes grow4 {
+  0% {
+    height: 95px;
+  }
+  10% {
+    height: 9px;
+  }
+  20% {
+    height: 47px;
+  }
+  30% {
+    height: 75px;
+  }
+  40% {
+    height: 32px;
+  }
+  50% {
+    height: 16px;
+  }
+  60% {
+    height: 55px;
+  }
+  70% {
+    height: 66px;
+  }
+  80% {
+    height: 10px;
+  }
+  90% {
+    height: 50px;
+  }
+  100% {
+    height: 68px;
+  }
+}
+.bar:nth-child(5) {
+  background-color: #42ebf4;
+  animation: grow5 1546ms alternate infinite;
+}
+
+@keyframes grow5 {
+  0% {
+    height: 47px;
+  }
+  10% {
+    height: 90px;
+  }
+  20% {
+    height: 56px;
+  }
+  30% {
+    height: 54px;
+  }
+  40% {
+    height: 51px;
+  }
+  50% {
+    height: 83px;
+  }
+  60% {
+    height: 25px;
+  }
+  70% {
+    height: 55px;
+  }
+  80% {
+    height: 72px;
+  }
+  90% {
+    height: 27px;
+  }
+  100% {
+    height: 85px;
+  }
+}
