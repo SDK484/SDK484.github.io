@@ -2,7 +2,7 @@
 var OPENMAP_API_KEY = "1bebf924115a028554101d8a8ca6af71";
 var CITY = 'Bangor';
 var COUNTRY = 'UK';
-var WEATHER_DATA = 'http://api.openweathermap.org/data/2.5/forecast?q='+CITY+','+COUNTRY+'&appid='+OPENMAP_API_KEY;
+var WEATHER_DATA = 'https://api.openweathermap.org/data/2.5/forecast?q='+CITY+','+COUNTRY+'&appid='+OPENMAP_API_KEY;
 
 // date
 var todayDate = new Date();

@@ -1,6 +1,6 @@
 // access data
 var OPENNEWS_API_KEY = '545a8bd72977413288b7de6e3fbead15';
-var NEWS_DATA = 'http://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=' + OPENNEWS_API_KEY;
+var NEWS_DATA = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=' + OPENNEWS_API_KEY;
 
 // get news data
 $.getJSON(NEWS_DATA, function(data) {
