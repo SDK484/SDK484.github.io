@@ -24,9 +24,9 @@ $.getJSON(WEATHER_DATA, function(data) {
 		var weaDate = weaDateSort[2]+'/'+weaDateSort[1]+'/'+weaDateSort[0];
 		var weaTime = weaReport[1].slice(0, -3); 
 		weather.innerHTML += ' <div class="weatherSlides fade"> \
-			<img style="position:absolute;top:25px;left:15px;" src="http://openweathermap.org/img/wn/'+report.weather[0].icon+'@2x.png" /> \
+			<img style="position:absolute;top:25px;left:15px;" src="https://openweathermap.org/img/wn/'+report.weather[0].icon+'@2x.png" /> \
 			<h1 style="position:absolute;top:40px;left:120px;">'+convertKelvinToCelsius(report.main.temp)+'</h1> \
-			<img style="position:absolute;top:25px;left:195px;" src="http://openweathermap.org/img/wn/50d@2x.png" /> \
+			<img style="position:absolute;top:25px;left:195px;" src="https://openweathermap.org/img/wn/50d@2x.png" /> \
 			<h1 style="position:absolute;top:40px;left:290px;">'+convertMpsToMph(report.wind.speed)+'</h1> \
 			<h4 style="position:absolute;top:100px;left:30px;">'+report.weather[0].description+'  -  '+weaDate+' '+weaTime+'</h4></div>';
 	});
