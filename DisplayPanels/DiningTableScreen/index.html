@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Table 29 Webapp</title>
+		<link type="text/css" rel="stylesheet" href="src/css/index.css"/>
+	</head>
+	<body>
+		<!-- map -->
+		<div id="map" class="map"></div>
+		<!-- draw and record -->
+		<!--
+		<form class="form-inline">
+		  <label>Geometry type &nbsp;</label>
+		  <select id="type">
+			<option value="Point">Point</option>
+			<option value="LineString">LineString</option>
+			<option value="Polygon">Polygon</option>
+			<option value="Circle">Circle</option>
+			<option value="None">None</option>
+		  </select>
+		</form>
+		<button id="saveBtn" type="button">Click</button>
+		-->
+		<!-- modal -->
+		<div id="modal" class="modal">
+			<!-- modal content -->
+			<div class="modalContent">
+				<span class="close">&times;</span>
+				<p id="modalTitle">...</p>
+				<label><b>Beers</b></label><br/><br/>
+				<label for="beer1">Heineken</label>
+				<input type="number" id="beer1" name="beer1" min="0" max="10"><br/>
+				<label for="beer2">Blue Moon</label>
+				<input type="number" id="beer2" name="beer2" min="0" max="10"><br/>
+				<label for="beer3">Estrella</label>
+				<input type="number" id="beer3" name="beer3" min="0" max="10"><br/><br/>
+				<label><b>Ciders<b/></label><br/><br/>
+				<label for="cider1">Magners</label>
+				<input type="number" id="cider1" name="cider1" min="0" max="10"><br/>
+				<label for="cider2">Strongbow</label>
+				<input type="number" id="cider2" name="cider2" min="0" max="10"><br/><br/>
+				<label><b>Wine / Spirits</b></label><br/><br/>
+				<label for="wineSpirit1">Bottle of Red</label>
+				<input type="number" id="wineSpirit1" name="wineSpirit1" min="0" max="10"><br/>
+				<label for="wineSpirit2">Bottle of White</label>
+				<input type="number" id="wineSpirit2" name="wineSpirit2" min="0" max="10"><br/>
+				<label for="wineSpirit3">Vodka Shot</label>
+				<input type="number" id="wineSpirit3" name="wineSpirit3" min="0" max="10"><br/>
+				<br/>
+				<input id="submit" type="submit" value="Order">
+			</div>
+		</div>
+		<!-- scripts -->
+		<script src="src/js/map.js"></script>
+		<script src="src/js/airtable.js"></script>
+		<script src="src/js/modal.js"></script>
+	</body>
+</html>
