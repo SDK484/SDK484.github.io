@@ -1,0 +1,38 @@
+html {
+	background-color: black;
+}
+
+#container {
+	position: absolute;
+	height: 98vh;
+	width: 98vw;
+	border: 0px solid red;
+}
+
+#video {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border: 0px solid blue;
+}
+
+@media only screen and (max-width: 750px) {
+}
+
+.flip1 {
+	transform: rotateY(180deg);
+	-webkit-transform:rotateY(180deg); /* Safari and Chrome */
+	-moz-transform:rotateY(180deg); /* Firefox */
+}
+
+.flip2 {
+	transform: rotateX(180deg);
+	-webkit-transform:rotateX(180deg); /* Safari and Chrome */
+	-moz-transform:rotateX(180deg); /* Firefox */
+}
+
+.flip3 {
+	transform: rotateX(180deg) rotateY(180deg);
+	-webkit-transform:rotateX(180deg) rotateY(180deg); /* Safari and Chrome */
+	-moz-transform:rotateX(180deg) rotateY(180deg); /* Firefox */
+}
