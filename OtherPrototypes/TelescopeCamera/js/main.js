@@ -25,9 +25,9 @@ document.getElementById("container").addEventListener("click", function() {
 var constraints = {
 	audio: false,
 	video: {
-		width: { min: 640, ideal: 1920 },
-		height: { min: 400, ideal: 1080 },
-		aspectRatio: { ideal: 1.7777777778 }
+		width: { min: 1280, ideal: 1920 },
+		height: { min: 720, ideal: 1080 },
+		facingMode: 'environment'
 	}
 }
 
