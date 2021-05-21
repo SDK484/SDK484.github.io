@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="index.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="container">
+		<div class="slideshow-container">
+			<div class="mySlides fade">
+				<div class="numbertext">1 / 4</div>
+				<div class="present">
+					<div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+					<div id="MyDateDisplay" class="date"></div>
+				</div>
+			</div>
+
+			<div class="mySlides fade">
+				<div class="numbertext">2 / 4</div>
+				<img class="present" src="./data/news.png" />
+			</div>
+
+			<div class="mySlides fade">
+				<div class="numbertext">3 / 4</div>
+				<img class="present" src="./data/weather.png" />
+			</div>
+
+			<div class="mySlides fade">
+				<div class="numbertext">4 / 4</div>
+				<img id="slideGif" class="present" />
+			</div>
+
+			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+			<a id="next" class="next" onclick="plusSlides(1)">&#10095;</a>
+		</div>
+	</div>
+	<script src="customScripts.js"></script>
+</body>
+</html> 
