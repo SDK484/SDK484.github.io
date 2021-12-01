@@ -12,13 +12,14 @@ html {
 
 .cal {
 	position: absolute;
-	width: 70vw; 
+	width: 55vw; 
 	float: left;
 }
 
 .imgs {
 	position: absolute;
 	margin-left: 70vw;
+	top: 5px;
 	width: 28vw;
 	height: 97vh;
 	overflow: hidden;
@@ -65,6 +66,10 @@ div[data-month-id="10"] > table > thead > tr > th.month-title {
 }
 div[data-month-id="11"] > table > thead > tr > th.month-title {
 	background-color: skyblue;
+}
+
+img {
+	border: 1px solid black;
 }
 
 /* imgs - rows/column */
