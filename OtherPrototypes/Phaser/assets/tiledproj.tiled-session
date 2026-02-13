@@ -1,0 +1,78 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tileset-64x64.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "iso-64x64-building.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "iso-64x64-outside.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "isorpg.tmx": {
+            "scale": 0.27414550781249997,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1025.0031169293793,
+                "y": 514.3254074271974
+            }
+        },
+        "isorpg.tmx#iso-64x64-building": {
+            "scaleInDock": 1
+        },
+        "isorpg.tmx#iso-64x64-outside": {
+            "scaleInDock": 1
+        },
+        "isotest": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 827,
+                "y": 517
+            }
+        },
+        "isotest.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 791.5,
+                "y": 496.5
+            }
+        },
+        "tileset-64x64.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/kennedyshare/Documents/Phaser/assets",
+    "last.imagePath": "/home/kennedyshare/Documents/Phaser/assets",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.orientation": null,
+    "map.tileWidth": 64,
+    "openFiles": [
+        "tileset-64x64.tsx",
+        "isotest.tmx"
+    ],
+    "project": "tiledproj.tiled-project",
+    "recentFiles": [
+        "isotest.tmx",
+        "tileset-64x64.tsx",
+        "iso-64x64-outside.tsx",
+        "iso-64x64-building.tsx",
+        "isorpg.tmx",
+        "isotest"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 64
+    }
+}

@@ -1,0 +1,429 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Phaser</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.0/dist/phaser.js"></script>
+    <script src="./assets/easystar-0.4.4.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+   <script type="text/javascript">
+var config = {
+    type: Phaser.WEBGL,
+    width: 1600,
+    height: 1000,
+    backgroundColor: '#2d2d2d',
+    pixelArt: true,
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    },
+    physics: {
+        default: 'arcade',
+        arcade: { debug: false }
+    }
+};
+
+var game = new Phaser.Game(config);
+var controls;
+
+let navMap;
+let npc;
+let npcPath = [];
+let npcMoving = false;
+
+const ISO_DIRECTIONS = [
+    { x: 1, y: 0 },   // Right
+    { x: 0, y: 1 },   // Down
+    { x: -1, y: 0 },  // Left
+    { x: 0, y: -1 }   // Up
+];
+
+/* ---------------- PRELOAD ---------------- */
+
+function preload() {
+    this.load.image('tiles', 'assets/tileset-64x64.png');
+    this.load.tilemapTiledJSON('map', 'assets/isotest.json');
+    this.load.image('npc', 'assets/npc.png');
+    this.load.image('npc-civ', 'assets/npc-civ.png');
+}
+
+/* ---------------- CREATE ---------------- */
+
+function create() {
+    // --- MAP ---
+    this.map = this.make.tilemap({ key: 'map' });
+
+    const tileset = this.map.addTilesetImage('tileset-64x64', 'tiles');
+
+    this.groundLayer = this.map.createLayer('Tile Layer 1', tileset, 0, 0);
+    this.obstacleLayer = this.map.createLayer('Tile Layer 2', tileset, 0, 0);
+
+    // Center isometric map (Phaser expects this)
+    const mapOffsetX = this.map.widthInPixels / 2;
+    this.groundLayer.setPosition(mapOffsetX, 0);
+    this.obstacleLayer.setPosition(mapOffsetX, 0);
+
+    // --- PATHFINDING GRID ---
+    this.easystar = new EasyStar.js();
+    navMap = [];
+
+    for (let y = 0; y < this.map.height; y++) {
+        const row = [];
+        for (let x = 0; x < this.map.width; x++) {
+
+            const groundTile = this.groundLayer.getTileAt(x, y);
+            const obstacleTile = this.obstacleLayer.getTileAt(x, y);
+
+            const walkable =
+                groundTile && groundTile.index !== -1 &&
+                (!obstacleTile || obstacleTile.index === -1);
+
+            row.push(walkable ? 0 : 1);
+        }
+        navMap.push(row);
+    }
+
+    this.easystar.setGrid(navMap);
+    this.easystar.setAcceptableTiles([0]);
+    this.easystar.enableDiagonals();
+    this.easystar.disableCornerCutting();
+
+    // --- CAMERA CONTROLS ---
+    const cursors = this.input.keyboard.createCursorKeys();
+    controls = new Phaser.Cameras.Controls.SmoothedKeyControl({
+        camera: this.cameras.main,
+        left: cursors.left,
+        right: cursors.right,
+        up: cursors.up,
+        down: cursors.down,
+        acceleration: 0.04,
+        drag: 0.0005,
+        maxSpeed: 0.7
+    });
+
+    // --- NPC SPAWN ---
+    const startTile = { x: 1, y: 3 };
+
+    const worldPos = this.groundLayer.tileToWorldXY(startTile.x, startTile.y);
+
+    npc = this.add.sprite(
+        worldPos.x + this.map.tileWidth / 2,
+        worldPos.y + this.map.tileHeight / 2,
+        'npc'
+    );
+
+    npc.tileX = startTile.x;
+    npc.tileY = startTile.y;
+    npc.speed = 2000; // ms per tile
+
+    // start wandering
+    this.time.delayedCall(500, () => {
+        wanderNPC.call(this);
+    });
+
+    // --- TILE ID 4 NPC TYPE ---
+
+this.tile4Npcs = [];
+
+// Scan map for tile ID 4
+for (let y = 0; y < this.map.height; y++) {
+    for (let x = 0; x < this.map.width; x++) {
+
+        const tile = this.groundLayer.getTileAt(x, y);
+
+        if (tile) { 
+            const targets = [5, 6, 7, 8, 9, 10];
+
+            if (targets.includes(tile.index)) {
+
+            const worldPos = this.groundLayer.tileToWorldXY(x, y);
+
+            const npc4 = this.add.sprite(
+                worldPos.x + this.map.tileWidth / 2,
+                worldPos.y + this.map.tileHeight / 2,
+                'npc-civ'
+            );
+
+            npc4.prevTileX = null;
+npc4.prevTileY = null;
+
+// Random rotation direction
+npc4.rotationDir = Phaser.Math.Between(0, 1) === 0 ? 1 : -1;
+// 1 = clockwise
+// -1 = counter-clockwise
+
+
+            npc4.tileX = x;
+            npc4.tileY = y;
+            npc4.speed = 1200;
+            npc4.moving = false;
+            npc4.type = "tile4";
+
+            this.tile4Npcs.push(npc4);
+        }
+    }
+    }
+}
+
+// Start their movement loop
+this.time.delayedCall(500, () => {
+    this.tile4Npcs.forEach(npc => {
+        moveTile4NPC.call(this, npc);
+    });
+});
+
+
+    // --- OPTIONAL DEBUG (perfectly aligned) ---
+    // const debug = this.add.graphics();
+    // debug.fillStyle(0x00ff00, 0.35);
+    // debug.lineStyle(1, 0xff0000, 0.5);
+
+    // for (let y = 0; y < navMap.length; y++) {
+    //     for (let x = 0; x < navMap[y].length; x++) {
+    //         const p = this.groundLayer.tileToWorldXY(x, y);
+    //         const cx = p.x + (this.map.tileWidth / 2);
+    //         const cy = (p.y + this.map.tileHeight / 2); //+ (this.map.tileHeight);
+
+    //         if (navMap[y][x] === 0) {
+    //             debug.fillStyle(0x00ff00, 1);
+    //             debug.fillCircle(cx, cy, 4);
+    //         } else {
+    //             debug.fillStyle('#0000FF', 1);
+    //             debug.fillCircle(cx, cy, 4);
+    //         }
+    //     }
+    // }
+
+    // for (let y = 0; y < this.map.height; y++) {
+    //     for (let x = 0; x < this.map.width; x++) {
+    //         const p = this.groundLayer.tileToWorldXY(x, y);
+    //         const cx = p.x + (this.map.tileWidth / 2);
+    //         const cy = (p.y + this.map.tileHeight / 2); //+ (this.map.tileHeight);
+            
+    //         this.add.text(cx, cy, `[${x}, ${y}]`, {
+    //             fontSize: '8px',
+    //             fontFamily: 'monospace',
+    //             color: '#0000FF'
+    //         });
+    //     }
+    // }
+}
+
+/* ---------------- NPC LOGIC ---------------- */
+
+function wanderNPC() {
+    if (npcMoving) return;
+
+    const radius = 5;
+
+    const startX = npc.tileX;
+    const startY = npc.tileY;
+
+    let endX, endY;
+
+    // find a valid random destination nearby
+    do {
+        endX = Phaser.Math.Between(startX - radius, startX + radius);
+        endY = Phaser.Math.Between(startY - radius, startY + radius);
+    } while (
+        endX < 0 ||
+        endY < 0 ||
+        endX >= this.map.width ||
+        endY >= this.map.height ||
+        navMap[endY][endX] !== 0
+    );
+
+    console.log(
+        `NPC path start: [${startX}, ${startY}] → end: [${endX}, ${endY}]`
+    );
+
+    this.easystar.findPath(startX, startY, endX, endY, path => {
+        if (!path || path.length <= 1) {
+            this.time.delayedCall(1000, () => wanderNPC.call(this));
+            return;
+        }
+
+        npcPath = path.slice(1); // skip current tile
+        npcMoving = true;
+
+        moveNPCAlongPath.call(this);
+    });
+
+    this.easystar.calculate();
+}
+
+function moveNPCAlongPath() {
+    if (npcPath.length === 0) {
+        npcMoving = false;
+
+        console.log(
+            `NPC arrived at: [${npc.tileX}, ${npc.tileY}]`
+        );
+
+        // wait, then wander again
+        this.time.delayedCall(1000, () => wanderNPC.call(this));
+        return;
+    }
+
+    const next = npcPath.shift();
+
+    const worldPos = this.groundLayer.tileToWorldXY(next.x, next.y);
+
+    this.tweens.add({
+        targets: npc,
+        x: worldPos.x + this.map.tileWidth / 2,
+        y: worldPos.y + this.map.tileHeight / 2,
+        duration: npc.speed,
+        onComplete: () => {
+            npc.tileX = next.x;
+            npc.tileY = next.y;
+            moveNPCAlongPath.call(this);
+        }
+    });
+}
+
+
+function moveTile4NPC(npc) {
+    if (npc.moving) return;
+
+    const currentX = npc.tileX;
+    const currentY = npc.tileY;
+
+    // Find direction index we arrived from
+    let startIndex = 0;
+
+    if (npc.prevTileX !== null) {
+        const dx = npc.prevTileX - currentX;
+        const dy = npc.prevTileY - currentY;
+
+        for (let i = 0; i < ISO_DIRECTIONS.length; i++) {
+            if (ISO_DIRECTIONS[i].x === dx && ISO_DIRECTIONS[i].y === dy) {
+                startIndex = i;
+                break;
+            }
+        }
+    }
+
+    // Rotate through directions in locked rotation order
+    for (let step = 1; step <= ISO_DIRECTIONS.length; step++) {
+
+        const index =
+            (startIndex + step * npc.rotationDir + ISO_DIRECTIONS.length) %
+            ISO_DIRECTIONS.length;
+
+        const dir = ISO_DIRECTIONS[index];
+
+        const nx = currentX + dir.x;
+        const ny = currentY + dir.y;
+
+        if (
+            nx >= 0 &&
+            ny >= 0 &&
+            nx < this.map.width &&
+            ny < this.map.height
+        ) {
+            const tile = this.groundLayer.getTileAt(nx, ny);
+
+            if (tile) {
+                const targets = [5, 6, 7, 8, 9, 10];
+
+                if (targets.includes(tile.index)) {
+
+                moveNpcToTile.call(this, npc, nx, ny);
+                return;
+            }
+            }
+        }
+    }
+
+    // If stuck (dead end), try again shortly
+    this.time.delayedCall(500, () => moveTile4NPC.call(this, npc));
+}
+
+function moveNpcToTile(npc, x, y) {
+
+    const worldPos = this.groundLayer.tileToWorldXY(x, y);
+
+    npc.moving = true;
+
+    this.tweens.add({
+        targets: npc,
+        x: worldPos.x + this.map.tileWidth / 2,
+        y: worldPos.y + this.map.tileHeight / 2,
+        duration: npc.speed,
+        onComplete: () => {
+
+            npc.prevTileX = npc.tileX;
+            npc.prevTileY = npc.tileY;
+
+            npc.tileX = x;
+            npc.tileY = y;
+
+            npc.moving = false;
+
+            moveTile4NPC.call(this, npc);
+        }
+    });
+}
+
+
+
+function getTile4Neighbors(x, y) {
+
+    const directions = [
+        { x: 1, y: 0 },
+        { x: -1, y: 0 },
+        { x: 0, y: 1 },
+        { x: 0, y: -1 },
+        { x: 1, y: -1 },
+        { x: -1, y: 1 }
+    ]; // isometric neighbors
+
+    const result = [];
+
+    directions.forEach(dir => {
+
+        const nx = x + dir.x;
+        const ny = y + dir.y;
+
+        if (
+            nx >= 0 &&
+            ny >= 0 &&
+            nx < this.map.width &&
+            ny < this.map.height
+        ) {
+            const tile = this.groundLayer.getTileAt(nx, ny);
+
+            if (tile) {
+
+                const targets = [5, 6, 7, 8, 9, 10];
+
+            if (targets.includes(tile.index)) {
+                result.push({ x: nx, y: ny });
+            }
+            }
+        }
+    });
+
+    return result;
+}
+
+
+/* ---------------- UPDATE ---------------- */
+
+function update(time, delta) {
+    controls.update(delta);
+}
+</script>
+
+
+</body>
+</html>
