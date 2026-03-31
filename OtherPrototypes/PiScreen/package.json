@@ -10,7 +10,7 @@
   "dependencies": {
     "capture-website": "^2.0.0",
     "jsdom": "^16.5.3",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "puppeteer": "^9.1.1",
     "url-to-screenshot": "^3.0.0"
   },
